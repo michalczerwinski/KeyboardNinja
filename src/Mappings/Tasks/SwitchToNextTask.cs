@@ -25,6 +25,6 @@ public record class SwitchToNextTask() : MappingRule("Tasks", "Go to next task",
 
 		var currentIndex = windows.IndexOf(currentWindow);
 		var targetIndex = (windows.Count + currentIndex - 1) % windows.Count;
-		DesktopHelper.SwitchActiveTask(windows, targetIndex);
+		DesktopHelper.SwitchActiveTask(windows[targetIndex]);
 	});
 }

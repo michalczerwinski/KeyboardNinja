@@ -1,5 +1,4 @@
 ﻿using Microsoft.Win32;
-using System.Diagnostics;
 using Windows.Win32;
 using Windows.Win32.Foundation;
 
@@ -29,7 +28,7 @@ internal class FormHelper
 				if (position != Rectangle.Empty)
 				{
 					var middle = new Point(position.X + position.Width / 2, position.Y + position.Height / 2);
-					PInvoke.MoveWindow((HWND)form.Handle, middle.X - form.Width/2, middle.Y - form.Height/2, form.Width, form.Height, true);
+					PInvoke.MoveWindow((HWND)form.Handle, middle.X - form.Width / 2, middle.Y - form.Height / 2, form.Width, form.Height, true);
 				}
 
 				init?.Invoke(form);
@@ -43,7 +42,7 @@ internal class FormHelper
 				if (form.Visible)
 				{
 					form.Hide();
-				}				
+				}
 			});
 		}
 	}
@@ -68,7 +67,6 @@ internal class FormHelper
 						name = keyName?.GetValue("Name") as string;
 					}
 
-					// note: you may want to use a resource string to localize the value
 					name ??= "Desktop " + (list.Count + 1);
 					list.Add((guid, name));
 

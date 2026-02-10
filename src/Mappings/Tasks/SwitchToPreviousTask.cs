@@ -25,6 +25,6 @@ public record class SwitchToPreviousTask() : MappingRule("Tasks", "Go to previou
 
 		var currentIndex = windows.IndexOf(currentWindow);
 		var targetIndex = (currentIndex + 1) % windows.Count;
-		DesktopHelper.SwitchActiveTask(windows, targetIndex);
+		DesktopHelper.SwitchActiveTask(windows[targetIndex]);
 	});
 }

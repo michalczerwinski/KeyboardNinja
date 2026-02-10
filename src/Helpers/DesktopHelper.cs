@@ -34,6 +34,21 @@ internal static class DesktopHelper
 			}
 		}
 
+		List<HWND> windows = GetDesktopWindows(monitor);
+
+		return windows;
+	}
+
+	public static Dictionary<HMONITOR, HWND> GetWindowsGroupByMonitors()
+	{
+		var windows = GetDesktopWindows(null);
+
+		return windows.GroupBy(g => PInvoke.MonitorFromWindow(g, MONITOR_FROM_FLAGS.MONITOR_DEFAULTTONEAREST))
+					  .ToDictionary(g => g.Key, g => g.First());
+	}
+
+	private static List<HWND> GetDesktopWindows(HMONITOR? monitor)
+	{
 		IVirtualDesktopManager? desktopManager = null;
 		try
 		{
@@ -96,19 +111,17 @@ internal static class DesktopHelper
 			return true;
 		}, IntPtr.Zero);
 
-        windows.Sort((a, b) => ((nint)a).CompareTo((nint)b));
-        return windows;
+		windows.Sort((a, b) => ((nint)a).CompareTo((nint)b));
+		return windows;
 	}
-    public static void SwitchActiveTask(List<HWND> windows, int targetIndex)
-    {
-        if (windows == null || windows.Count == 0)
-            return;
 
-        var target = windows[targetIndex];
-        if (PInvoke.IsIconic(target))
-        {
-            PInvoke.ShowWindow(target, SHOW_WINDOW_CMD.SW_RESTORE);
-        }
-        PInvoke.SetForegroundWindow(target);
-    }
+	public static void SwitchActiveTask(HWND window)
+	{
+		if (PInvoke.IsIconic(window))
+		{
+			PInvoke.ShowWindow(window, SHOW_WINDOW_CMD.SW_RESTORE);
+		}
+
+		PInvoke.SetForegroundWindow(window);
+	}
 }
