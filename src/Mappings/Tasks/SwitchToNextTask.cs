@@ -23,11 +23,8 @@ public record class SwitchToNextTask() : MappingRule("Tasks", "Go to next task",
 			return;
 		}
 
-		windows.Sort((a, b) => ((nint)a).CompareTo((nint)b));
-
 		var currentIndex = windows.IndexOf(currentWindow);
-		var target = windows[(windows.Count + currentIndex - 1) % windows.Count];
-
-		PInvoke.SetForegroundWindow(target);
+		var targetIndex = (windows.Count + currentIndex - 1) % windows.Count;
+		DesktopHelper.SwitchActiveTask(windows, targetIndex);
 	});
 }

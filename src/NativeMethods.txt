@@ -7,6 +7,8 @@ MoveWindow
 EnumWindows
 IsWindowVisible
 SetForegroundWindow
+IsIconic
+ShowWindow
 MonitorFromWindow
 GetWindowTextLength
 GetWindow

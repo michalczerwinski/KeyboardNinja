@@ -96,6 +96,19 @@ internal static class DesktopHelper
 			return true;
 		}, IntPtr.Zero);
 
-		return windows;
+        windows.Sort((a, b) => ((nint)a).CompareTo((nint)b));
+        return windows;
 	}
+    public static void SwitchActiveTask(List<HWND> windows, int targetIndex)
+    {
+        if (windows == null || windows.Count == 0)
+            return;
+
+        var target = windows[targetIndex];
+        if (PInvoke.IsIconic(target))
+        {
+            PInvoke.ShowWindow(target, SHOW_WINDOW_CMD.SW_RESTORE);
+        }
+        PInvoke.SetForegroundWindow(target);
+    }
 }
