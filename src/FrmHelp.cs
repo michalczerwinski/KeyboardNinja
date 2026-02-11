@@ -20,8 +20,7 @@ public partial class FrmHelp : Form
 		helpText.Append(@"{\rtf1\ansi\deff0
 {\fonttbl{\f0 Arial;}}
 {\colortbl;\red0\green0\blue0;\red30\green144\blue255;\red105\green105\blue105;}
-\pard\sa200\sl276\slmult1\f0\fs20f
-");
+\pard\sa200\sl276\slmult1\f0\fs20");
 
 		foreach (var group in Program.MappingRules.GroupBy(m => m.Category))
 		{

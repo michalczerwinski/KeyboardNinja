@@ -1,5 +1,4 @@
-﻿using Microsoft.Win32;
-using Windows.Win32;
+﻿using Windows.Win32;
 using Windows.Win32.Foundation;
 
 namespace KeyboardNinja.Helpers;
@@ -27,8 +26,7 @@ internal class FormHelper
 			{
 				if (position != Rectangle.Empty)
 				{
-					var middle = new Point(position.X + position.Width / 2, position.Y + position.Height / 2);
-					PInvoke.MoveWindow((HWND)form.Handle, middle.X - form.Width / 2, middle.Y - form.Height / 2, form.Width, form.Height, true);
+					TryToMoveWindow(form, position);
 				}
 
 				init?.Invoke(form);
@@ -47,34 +45,39 @@ internal class FormHelper
 		}
 	}
 
-	public static IReadOnlyList<(Guid DesktopId, string DesktopName)> GetWindowDesktops()
+	private static void TryToMoveWindow<TForm>(TForm form, Rectangle position) where TForm : Form, new()
 	{
-		var list = new List<(Guid, string)>();
-
-		using var key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VirtualDesktops", writable: false);
-		if (key != null)
+		// Compute intended top-left based on the center of the position rect
+		var middle = new Point(position.X + position.Width / 2, position.Y + position.Height / 2);
+		var destX = middle.X - form.Width / 2;
+		var destY = middle.Y - form.Height / 2;
+		var topLeft = new Point(destX, destY);
+		var bottomRight = new Point(destX + form.Width - 1, destY + form.Height - 1);
+		try
 		{
-			if (key.GetValue("VirtualDesktopIDs") is byte[] ids)
+			var s1 = Screen.FromPoint(topLeft);
+			var s2 = Screen.FromPoint(bottomRight);
+			if (s1.DeviceName == s2.DeviceName)
 			{
-				const int GuidSize = 16;
-				var span = ids.AsSpan();
-				while (span.Length >= GuidSize)
-				{
-					var guid = new Guid(span.Slice(0, GuidSize));
-					string? name = null;
-					using (var keyName = key.OpenSubKey($@"Desktops\{guid:B}", writable: false))
-					{
-						name = keyName?.GetValue("Name") as string;
-					}
-
-					name ??= "Desktop " + (list.Count + 1);
-					list.Add((guid, name));
-
-					span = span.Slice(GuidSize);
-				}
+				PInvoke.MoveWindow((HWND)form.Handle, destX, destY, form.Width, form.Height, true);
+			}
+			else
+			{
+				// fallback to primary screen center
+				var screen = Screen.PrimaryScreen ?? Screen.AllScreens.First();
+				var wa = screen.WorkingArea;
+				var cx = wa.Left + (wa.Width - form.Width) / 2;
+				var cy = wa.Top + (wa.Height - form.Height) / 2;
+				PInvoke.MoveWindow((HWND)form.Handle, cx, cy, form.Width, form.Height, true);
 			}
 		}
-
-		return list;
+		catch
+		{
+			var screen = Screen.PrimaryScreen ?? Screen.AllScreens.First();
+			var wa = screen.WorkingArea;
+			var cx = wa.Left + (wa.Width - form.Width) / 2;
+			var cy = wa.Top + (wa.Height - form.Height) / 2;
+			PInvoke.MoveWindow((HWND)form.Handle, cx, cy, form.Width, form.Height, true);
+		}
 	}
 }
