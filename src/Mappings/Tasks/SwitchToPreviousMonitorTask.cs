@@ -5,13 +5,10 @@ using Windows.Win32.Foundation;
 
 namespace KeyboardNinja.Mappings.Tasks;
 
-
-public record class Test() : MappingRule("Test", "Test", KeyCode.VcT, KeyCode.VcO)
+public record class SwitchToPreviousMonitorTask() : MappingRule("Tasks", "Go to task on next monitor", KeyCode.VcT, KeyCode.VcH)
 {
 	public override Task ExecutePressAsync() => Task.Run(() =>
 	{
-		//ToastNotificationHelper.Show("This is a test notification.");
-
 		var monitorToWindows = DesktopHelper.GetWindowsGroupByMonitors();
 
 		if (monitorToWindows.Count == 0)
@@ -29,7 +26,7 @@ public record class Test() : MappingRule("Test", "Test", KeyCode.VcT, KeyCode.Vc
 		var currentMonitor = monitorToWindows.FirstOrDefault(g => g.Value == currentWindow).Key;
 		var monitors = monitorToWindows.Keys.ToList();
 		var currentIndex = monitors.IndexOf(currentMonitor);
-		var targetIndex = (currentIndex + 1) % monitors.Count;
+		var targetIndex = (monitors.Count + currentIndex - 1) % monitors.Count;
 		var firstWindowOnTargetMonitor = monitorToWindows[monitors[targetIndex]];
 		DesktopHelper.SwitchActiveTask(firstWindowOnTargetMonitor);
 	});

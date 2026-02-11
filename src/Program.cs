@@ -22,11 +22,29 @@ internal static class Program
 
 		ApplicationConfiguration.Initialize();
 
-		var icon = new NotifyIcon();
-		icon.Icon = Helpers.IconHelper.CreateNinjaIcon();
-		icon.Visible = true;
+		var icon = new NotifyIcon
+		{
+			Icon = Helpers.IconHelper.CreateNinjaIcon(),
+			Text = Application.ProductName,
+			Visible = true,
+			ContextMenuStrip = BuildContextMenu()
+		};
 
 		Application.Run();
+	}
+
+	private static ContextMenuStrip BuildContextMenu()
+	{
+		var contextMenu = new ContextMenuStrip();
+
+		var showHelpMenuItem = new ToolStripMenuItem("Show Help");
+		showHelpMenuItem.Click += (sender, e) => { Helpers.FormHelper.ToggleForm<FrmHelp>(); };
+		contextMenu.Items.Add(showHelpMenuItem);
+
+		var exitMenuItem = new ToolStripMenuItem("Exit");
+		exitMenuItem.Click += (sender, e) => { Application.Exit(); };
+		contextMenu.Items.Add(exitMenuItem);
+		return contextMenu;
 	}
 
 	public static List<MappingRule> MappingRules = [
@@ -58,6 +76,8 @@ internal static class Program
 		new ShowContextmenu(),
 		new SwitchToNextTask(),
 		new SwitchToPreviousTask(),
+		new SwitchToNextMonitorTask(),
+		new SwitchToPreviousMonitorTask(),
 		new ShowHelp(),
 		new MoveWindowLeft(),
 		new MoveWindowRight(),
