@@ -7,6 +7,6 @@ public record class Test() : MappingRule("Test", "Test", KeyCode.VcT, KeyCode.Vc
 {
 	public override Task ExecutePressAsync() => Task.Run(() =>
 	{
-		ToastNotificationHelper.Show("This is a test notification.\n\nAdditional lines with info\nOne more line\nAnd one more");
+		NotificationHelper.ShowToast("This is a test notification.\n\nAdditional lines with info\nOne more line\nAnd one more");
 	});
 }

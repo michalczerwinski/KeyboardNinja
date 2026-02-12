@@ -1,13 +1,12 @@
-using System.Linq;
 using Windows.Win32;
 using Windows.Win32.Foundation;
 using Windows.Win32.UI.WindowsAndMessaging;
 
 namespace KeyboardNinja.Helpers;
 
-public static class ToastNotificationHelper
+public static class NotificationHelper
 {
-    private static Rectangle GetTargetWorkingArea()
+	private static Rectangle GetTargetWorkingArea()
 	{
 		try
 		{
@@ -70,9 +69,9 @@ public static class ToastNotificationHelper
 		}
 	}
 
-	public static void Show(string message, int durationMs = 2000)
+	public static void ShowToast(string message, int durationMs = 2000)
 	{
-        using var form = new PopupForm(message);
+		using var form = new PopupForm(message);
 		var workingArea = GetTargetWorkingArea();
 		form.Load += (_, _) =>
 		{
