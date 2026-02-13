@@ -69,28 +69,41 @@ public static class NotificationHelper
 		}
 	}
 
-	public static void ShowToast(string message, int durationMs = 2000)
+	public static Form ShowToast(string message, int? durationMs)
 	{
-		using var form = new PopupForm(message);
+		var form = new PopupForm(message);
 		var workingArea = GetTargetWorkingArea();
 		form.Load += (_, _) =>
 		{
 			form.Location = new Point(workingArea.Right - form.Width - 16, workingArea.Bottom - form.Height - 16);
 		};
-		var timer = new System.Windows.Forms.Timer { Interval = durationMs };
-		timer.Tick += (_, _) =>
+
+
+		if (durationMs.HasValue)
 		{
-			timer.Stop();
-			form.Close();
-		};
-		timer.Start();
+			System.Windows.Forms.Timer? timer = new() { Interval = durationMs.Value };
+			timer.Tick += (_, _) =>
+			{
+				timer.Stop();
+				form.Close();
+				form.Dispose();
+			};
+			timer.Start();
+		}
+
 		form.Show();
 		PInvoke.SetWindowPos((HWND)form.Handle, (HWND)(-1), 0, 0, 0, 0, SET_WINDOW_POS_FLAGS.SWP_NOMOVE | SET_WINDOW_POS_FLAGS.SWP_NOSIZE | SET_WINDOW_POS_FLAGS.SWP_NOACTIVATE | SET_WINDOW_POS_FLAGS.SWP_SHOWWINDOW);
-		Application.DoEvents();
-		while (form.Visible)
+
+		if (durationMs.HasValue)
 		{
-			Thread.Sleep(50);
 			Application.DoEvents();
+			while (form.Visible)
+			{
+				Thread.Sleep(50);
+				Application.DoEvents();
+			}
 		}
+
+		return form;
 	}
 }

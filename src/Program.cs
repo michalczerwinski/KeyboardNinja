@@ -1,3 +1,4 @@
+using KeyboardNinja.Helpers;
 using KeyboardNinja.Mappings.Clipboard;
 using KeyboardNinja.Mappings.Delete;
 using KeyboardNinja.Mappings.Desktop;
@@ -7,6 +8,7 @@ using KeyboardNinja.Mappings.Tasks;
 using KeyboardNinja.Mappings.Window;
 using SharpHook;
 using SharpHook.Native;
+using System.Text;
 
 namespace KeyboardNinja;
 
@@ -24,13 +26,47 @@ internal static class Program
 
 		var icon = new NotifyIcon
 		{
-			Icon = Helpers.IconHelper.CreateNinjaIcon(),
+			Icon = IconHelper.CreateNinjaIcon(),
 			Text = Application.ProductName,
 			Visible = true,
 			ContextMenuStrip = BuildContextMenu()
 		};
 
+		//HandleHintForm();
 		Application.Run();
+	}
+
+	private static void HandleHintForm()
+	{
+		var x = new System.Windows.Forms.Timer();
+		x.Tick += (s, e) =>
+		{
+			var lastKeyPressed = _pressingStarted.Any() ? _pressingStarted.Values.Max() : (DateTimeOffset?)null;
+
+			string GetKeyDescription(KeyCode keyCode) => keyCode.ToString().Replace("Vc", string.Empty);
+
+			if (_hintForm == null)
+			{
+				if (DateTime.UtcNow - lastKeyPressed > TimeSpan.FromMilliseconds(1200))
+				{
+					StringBuilder help = new();
+					var applicableRules = MappingRules.Where(r => _pressingStarted.Keys.Contains(r.PrimaryKey)).OrderByDescending(r => r.UsageCount).Take(10);
+					foreach (var rule in applicableRules)
+					{
+						help.AppendLine($"{GetKeyDescription(rule.PrimaryKey)}+{GetKeyDescription(rule.SecondaryKey)}: {rule.Description}");
+					}
+					_hintForm = NotificationHelper.ShowToast(help.ToString(), null);
+				}
+			}
+			else if (lastKeyPressed == null)
+			{
+				_hintForm.Close();
+				_hintForm.Dispose();
+				_hintForm = null;
+			}
+		};
+		x.Interval = 800;
+		x.Start();
 	}
 
 	private static ContextMenuStrip BuildContextMenu()
@@ -111,6 +147,7 @@ internal static class Program
 
 	private static Dictionary<KeyCode, DateTimeOffset> _pressingStarted = new();
 	private static HashSet<KeyCode> _primaryUsed = new();
+	private static Form? _hintForm = null;
 
 	private static void Hook_KeyPressed(object? sender, KeyboardHookEventArgs e)
 	{

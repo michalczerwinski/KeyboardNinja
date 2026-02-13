@@ -19,7 +19,7 @@
     <PackageReference Include="SharpHook" Version="5.3.9"></PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="FrmList.cs">
+    <Compile Update="Forms\FrmList.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

@@ -20,7 +20,7 @@ public partial class FrmHelp : Form
 		helpText.Append(@"{\rtf1\ansi\deff0
 {\fonttbl{\f0 Arial;}}
 {\colortbl;\red0\green0\blue0;\red30\green144\blue255;\red105\green105\blue105;}
-\pard\sa200\sl276\slmult1\f0\fs20");
+\pard\sa200\sl276\slmult1\f0\fs20\tx440\tx29880");
 
 		foreach (var group in Program.MappingRules.GroupBy(m => m.Category))
 		{
@@ -28,7 +28,7 @@ public partial class FrmHelp : Form
 			foreach (var mapping in group)
 			{
 				var usageInfo = mapping.UsageCount switch { 0 => string.Empty, 1 => "[Used 1 time]", _ => $"[Used {mapping.UsageCount} times]" };
-				helpText.Append($"\\tab {mapping.Description} (\\b {GetKeyDescription(mapping.PrimaryKey)} + {GetKeyDescription(mapping.SecondaryKey)}\\b0 ) \\cf3 {usageInfo} \\cf1\\par\n"); // Description, bold keys, gray usage info
+				helpText.Append($"\\tab {mapping.Description} (\\b {GetKeyDescription(mapping.PrimaryKey)} + {GetKeyDescription(mapping.SecondaryKey)}\\b0 ) \\cf3 \\tab \\tab {usageInfo} \\cf1\\par\n"); // Description, bold keys, gray usage info
 			}
 			helpText.Append("\\par\n"); // Extra line break after each category group
 		}
