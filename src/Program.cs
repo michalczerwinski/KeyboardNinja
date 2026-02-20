@@ -156,6 +156,13 @@ internal static class Program
 			return;
 		}
 
+		if (Forms.FrmNavigationOverlay.ActiveOverlay is { } overlay)
+		{
+			overlay.HandleKeyFromHook(e.Data.KeyCode);
+			e.SuppressEvent = true;
+			return;
+		}
+
 		//Trace.WriteLine($"Press: {e.Data.KeyCode.ToString()}");
 
 		bool isShiftPressed = (e.RawEvent.Mask & ModifierMask.LeftShift) > 0 || (e.RawEvent.Mask & ModifierMask.RightShift) > 0;
@@ -229,6 +236,12 @@ internal static class Program
 	{
 		if (e.IsEventSimulated)
 		{
+			return;
+		}
+
+		if (Forms.FrmNavigationOverlay.ActiveOverlay != null)
+		{
+			e.SuppressEvent = true;
 			return;
 		}
 
