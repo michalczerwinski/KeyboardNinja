@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Text.Json;
 using KeyboardNinja.Actions;
 using KeyboardNinja.Helpers;
+using KeyboardNinja.Configuration.Model;
 
 namespace KeyboardNinja.Configuration;
 

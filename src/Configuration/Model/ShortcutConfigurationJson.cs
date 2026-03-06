@@ -1,6 +1,6 @@
 using System.Text.Json;
 
-namespace KeyboardNinja.Configuration;
+namespace KeyboardNinja.Configuration.Model;
 
 internal static class ShortcutConfigurationJson
 {

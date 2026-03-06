@@ -1,5 +1,6 @@
 using System.Text.Json;
 using KeyboardNinja.Configuration;
+using KeyboardNinja.Configuration.Model;
 
 namespace KeyboardNinja.Actions;
 

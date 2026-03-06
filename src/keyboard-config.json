@@ -172,6 +172,10 @@
         {
           "key": "End",
           "shift": true
+        },
+        {
+          "key": "C",
+          "control": true
         }
       ]
     }
@@ -329,7 +333,7 @@
     }
   },
   {
-    "name": "Navigation/Show context\tmenu",
+    "name": "Navigation/Show context menu",
     "trigger": "F+P",
     "action": {
       "name": "send-keys",
