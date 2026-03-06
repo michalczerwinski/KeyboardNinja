@@ -7,14 +7,14 @@ namespace KeyboardNinja;
 
 internal partial class FrmHelp : Form
 {
-	private readonly IShortcutCatalog _shortcutCatalog;
+	private readonly IShortcutConfigurationService _shortcutCatalog;
 
 	public FrmHelp()
 		: this(EmptyShortcutCatalog.Instance)
 	{
 	}
 
-	public FrmHelp(IShortcutCatalog shortcutCatalog)
+	public FrmHelp(IShortcutConfigurationService shortcutCatalog)
 	{
 		_shortcutCatalog = shortcutCatalog;
 		InitializeComponent();
@@ -77,7 +77,7 @@ internal partial class FrmHelp : Form
 		BuildHelp();
 	}
 
-	private sealed class EmptyShortcutCatalog : IShortcutCatalog
+	private sealed class EmptyShortcutCatalog : IShortcutConfigurationService
 	{
 		public static EmptyShortcutCatalog Instance { get; } = new();
 

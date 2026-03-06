@@ -8,7 +8,7 @@ using KeyboardNinja.Configuration.Model;
 
 namespace KeyboardNinja.Configuration;
 
-internal sealed class ShortcutConfigurationService : IShortcutCatalog, IDisposable
+internal sealed class ShortcutConfigurationService : IShortcutConfigurationService, IDisposable
 {
 	private readonly IShortcutActionRegistry _actionRegistry;
 	private readonly string _configurationFilePath = Path.Combine(AppContext.BaseDirectory, "keyboard-config.json");

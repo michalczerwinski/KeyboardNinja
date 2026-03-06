@@ -1,6 +1,6 @@
 namespace KeyboardNinja.Configuration;
 
-internal interface IShortcutCatalog
+internal interface IShortcutConfigurationService
 {
 	IReadOnlyList<ShortcutBinding> CurrentShortcuts { get; }
 

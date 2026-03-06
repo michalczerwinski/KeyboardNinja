@@ -3,9 +3,9 @@ using SharpHook.Native;
 
 namespace KeyboardNinja.Configuration;
 
-internal sealed class ShortcutHookService(IShortcutCatalog shortcutCatalog) : IDisposable
+internal sealed class ShortcutHookService(IShortcutConfigurationService shortcutCatalog) : IDisposable
 {
-	private readonly IShortcutCatalog _shortcutCatalog = shortcutCatalog ?? throw new ArgumentNullException(nameof(shortcutCatalog));
+	private readonly IShortcutConfigurationService _shortcutCatalog = shortcutCatalog ?? throw new ArgumentNullException(nameof(shortcutCatalog));
 	private readonly Dictionary<KeyCode, DateTimeOffset> _pressingStarted = [];
 	private readonly HashSet<KeyCode> _primaryUsed = [];
 	private readonly object _stateSyncRoot = new();

@@ -42,8 +42,8 @@ internal static class Program
 		services.AddSingleton<IShortcutAction, ShowToastAction>();
 		services.AddSingleton<IShortcutAction, EditConfigAction>();
 		services.AddSingleton<IShortcutActionRegistry, ShortcutActionRegistry>();
-		services.AddSingleton<IShortcutCatalog, ShortcutConfigurationService>();
-		services.AddSingleton(serviceProvider => (ShortcutConfigurationService)serviceProvider.GetRequiredService<IShortcutCatalog>());
+		services.AddSingleton<IShortcutConfigurationService, ShortcutConfigurationService>();
+		services.AddSingleton(serviceProvider => (ShortcutConfigurationService)serviceProvider.GetRequiredService<IShortcutConfigurationService>());
 		services.AddSingleton<ShortcutHookService>();
 		services.AddTransient<FrmHelp>();
 		services.AddSingleton<KeyboardNinjaApplicationContext>();
