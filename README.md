@@ -6,8 +6,15 @@ KeyboardNinja is a lightweight, powerful utility for Windows that provides VI-in
 
 - **VI-inspired keybindings**: Use familiar VI-like key combinations for navigation, selection, and text manipulation.
 - **System-wide**: The shortcuts work across all applications on your Windows machine.
-- **Customizable**: (Coming Soon) Configure your own shortcuts and create new ones.
+- **Customizable**: Edit `keyboard-config.json` to tweak shortcuts and actions without rebuilding the app.
 - **Lightweight**: KeyboardNinja is designed to be unobtrusive and consume minimal system resources.
+
+## Configuration
+
+- Keyboard shortcuts are stored in `keyboard-config.json` next to the application executable.
+- Each entry uses `"name": "Category/Description"` and `"trigger": "Primary+Secondary"`.
+- Use the tray icon's **Configuration** menu item to open the file in your default JSON editor.
+- Saving the file reloads the shortcut configuration automatically.
 
 ## Shortcuts
 
@@ -100,7 +107,7 @@ The following tables list the default shortcuts available in KeyboardNinja. The 
 
 - [x] Core VI-inspired keybindings for navigation, selection, and clipboard
 - [x] Window and desktop management
-- [ ] Individual shortcut configuration
+- [x] Individual shortcut configuration
 - [ ] Create new custom shortcuts
 - [ ] UI for configuration
 

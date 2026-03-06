@@ -1,4 +1,5 @@
-﻿using Windows.Win32;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Windows.Win32;
 using Windows.Win32.Foundation;
 
 namespace KeyboardNinja.Helpers;
@@ -16,12 +17,24 @@ internal class FormHelper
 
 	public static void ToggleForm<TForm>(Action<TForm>? init = null) where TForm : Form, new()
 	{
+		ToggleFormCore(() => new TForm(), init);
+	}
+
+	public static void ToggleForm<TForm>(IServiceProvider serviceProvider, Action<TForm>? init = null) where TForm : Form
+	{
+		ArgumentNullException.ThrowIfNull(serviceProvider);
+
+		ToggleFormCore(() => ActivatorUtilities.CreateInstance<TForm>(serviceProvider), init);
+	}
+
+	private static void ToggleFormCore<TForm>(Func<TForm> formFactory, Action<TForm>? init) where TForm : Form
+	{
 		var form = Application.OpenForms.OfType<TForm>().FirstOrDefault();
 		if (form == null)
 		{
 			var position = GetActiveWindowRectangle();
 
-			form = new TForm();
+			form = formFactory();
 			form.HandleCreated += (s, e) =>
 			{
 				if (position != Rectangle.Empty)
@@ -45,7 +58,7 @@ internal class FormHelper
 		}
 	}
 
-	private static void TryToMoveWindow<TForm>(TForm form, Rectangle position) where TForm : Form, new()
+	private static void TryToMoveWindow<TForm>(TForm form, Rectangle position) where TForm : Form
 	{
 		// Compute intended top-left based on the center of the position rect
 		var middle = new Point(position.X + position.Width / 2, position.Y + position.Height / 2);

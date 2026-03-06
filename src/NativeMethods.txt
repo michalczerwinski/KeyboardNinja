@@ -5,6 +5,7 @@ GetForegroundWindow
 GetWindowRect
 MoveWindow
 EnumWindows
+EnumChildWindows
 IsWindowVisible
 SetForegroundWindow
 IsIconic
@@ -19,3 +20,4 @@ WINDOW_EX_STYLE
 HWND
 HMONITOR
 SetWindowPos
+GetClassName

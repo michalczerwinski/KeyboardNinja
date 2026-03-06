@@ -1,0 +1,637 @@
+[
+  {
+    "name": "Selection/Press the cursor up key with shift",
+    "trigger": "S+K",
+    "action": {
+      "name": "send-keys",
+      "keys": [
+        {
+          "key": "Up",
+          "shift": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "Selection/Press the cursor down key with shift",
+    "trigger": "S+J",
+    "action": {
+      "name": "send-keys",
+      "keys": [
+        {
+          "key": "Down",
+          "shift": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "Selection/Press the cursor left key with shift",
+    "trigger": "S+H",
+    "action": {
+      "name": "send-keys",
+      "keys": [
+        {
+          "key": "Left",
+          "shift": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "Selection/Press the cursor right key with shift",
+    "trigger": "S+L",
+    "action": {
+      "name": "send-keys",
+      "keys": [
+        {
+          "key": "Right",
+          "shift": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "Selection/Select the word on the left",
+    "trigger": "S+,",
+    "action": {
+      "name": "send-keys",
+      "keys": [
+        {
+          "key": "Left",
+          "shift": true,
+          "control": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "Selection/Select the word on the right",
+    "trigger": "S+.",
+    "action": {
+      "name": "send-keys",
+      "keys": [
+        {
+          "key": "Right",
+          "shift": true,
+          "control": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "Selection/Select until beginning",
+    "trigger": "S+N",
+    "action": {
+      "name": "send-keys",
+      "keys": [
+        {
+          "key": "Home",
+          "shift": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "Selection/Select until end",
+    "trigger": "S+M",
+    "action": {
+      "name": "send-keys",
+      "keys": [
+        {
+          "key": "End",
+          "shift": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "Selection/Select all",
+    "trigger": "S+O",
+    "action": {
+      "name": "send-keys",
+      "keys": [
+        {
+          "key": "A",
+          "control": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "Clipboard/Copy (yank) to clipboard",
+    "trigger": "C+Y",
+    "action": {
+      "name": "send-keys",
+      "keys": [
+        {
+          "key": "C",
+          "control": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "Clipboard/Paste from clipboard",
+    "trigger": "C+P",
+    "action": {
+      "name": "send-keys",
+      "keys": [
+        {
+          "key": "V",
+          "control": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "Clipboard/Paste from history",
+    "trigger": "C+H",
+    "action": {
+      "name": "send-keys",
+      "keys": [
+        {
+          "key": "V",
+          "windows": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "Clipboard/Copy current line of text to clipboard",
+    "trigger": "C+L",
+    "action": {
+      "name": "send-keys",
+      "keys": [
+        {
+          "key": "Home"
+        },
+        {
+          "key": "Home"
+        },
+        {
+          "key": "End",
+          "shift": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "Clipboard/Undo",
+    "trigger": "C+U",
+    "action": {
+      "name": "send-keys",
+      "keys": [
+        {
+          "key": "Z",
+          "control": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "Clipboard/Undo",
+    "trigger": "C+I",
+    "action": {
+      "name": "send-keys",
+      "keys": [
+        {
+          "key": "Y",
+          "control": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "Navigation/Press the cursor up key",
+    "trigger": "F+K",
+    "action": {
+      "name": "send-keys",
+      "keys": [
+        {
+          "key": "Up"
+        }
+      ]
+    }
+  },
+  {
+    "name": "Navigation/Press the cursor down key",
+    "trigger": "F+J",
+    "action": {
+      "name": "send-keys",
+      "keys": [
+        {
+          "key": "Down"
+        }
+      ]
+    }
+  },
+  {
+    "name": "Navigation/Press the cursor left key",
+    "trigger": "F+H",
+    "action": {
+      "name": "send-keys",
+      "keys": [
+        {
+          "key": "Left"
+        }
+      ]
+    }
+  },
+  {
+    "name": "Navigation/Press the cursor right key",
+    "trigger": "F+L",
+    "action": {
+      "name": "send-keys",
+      "keys": [
+        {
+          "key": "Right"
+        }
+      ]
+    }
+  },
+  {
+    "name": "Navigation/Go to one word left",
+    "trigger": "F+,",
+    "action": {
+      "name": "send-keys",
+      "keys": [
+        {
+          "key": "Left",
+          "control": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "Navigation/Go to one word right",
+    "trigger": "F+.",
+    "action": {
+      "name": "send-keys",
+      "keys": [
+        {
+          "key": "Right",
+          "control": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "Desktop/Go to next desktop",
+    "trigger": "D+L",
+    "action": {
+      "name": "send-keys",
+      "keys": [
+        {
+          "key": "Right",
+          "control": true,
+          "windows": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "Desktop/Go to previous desktop",
+    "trigger": "D+H",
+    "action": {
+      "name": "send-keys",
+      "keys": [
+        {
+          "key": "Left",
+          "control": true,
+          "windows": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "Navigation/Go to the beginning of the line",
+    "trigger": "F+N",
+    "action": {
+      "name": "send-keys",
+      "keys": [
+        {
+          "key": "Home"
+        }
+      ]
+    }
+  },
+  {
+    "name": "Navigation/Go to the end of the line",
+    "trigger": "F+M",
+    "action": {
+      "name": "send-keys",
+      "keys": [
+        {
+          "key": "End"
+        }
+      ]
+    }
+  },
+  {
+    "name": "Navigation/Show context\tmenu",
+    "trigger": "F+P",
+    "action": {
+      "name": "send-keys",
+      "keys": [
+        {
+          "key": "F10",
+          "shift": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "Tasks/Go to next task",
+    "trigger": "T+.",
+    "action": {
+      "name": "switch-task",
+      "direction": "next"
+    }
+  },
+  {
+    "name": "Tasks/Go to previous task",
+    "trigger": "T+,",
+    "action": {
+      "name": "switch-task",
+      "direction": "previous"
+    }
+  },
+  {
+    "name": "Tasks/Go to task on next monitor",
+    "trigger": "T+L",
+    "action": {
+      "name": "switch-task",
+      "direction": "next",
+      "scope": "adjacent-monitor"
+    }
+  },
+  {
+    "name": "Tasks/Go to task on next monitor",
+    "trigger": "T+H",
+    "action": {
+      "name": "switch-task",
+      "direction": "previous",
+      "scope": "adjacent-monitor"
+    }
+  },
+  {
+    "name": "Miscellaneous/Show help",
+    "trigger": "F+/",
+    "action": {
+      "name": "show-help"
+    }
+  },
+  {
+    "name": "Miscellaneous/Edit config",
+    "trigger": "T+P",
+    "action": {
+      "name": "edit-config"
+    }
+  },
+  {
+    "name": "Window/Move window left (another monitor)",
+    "trigger": "W+,",
+    "action": {
+      "name": "send-keys",
+      "keys": [
+        {
+          "key": "Left",
+          "shift": true,
+          "windows": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "Window/Move window right (another monitor)",
+    "trigger": "W+.",
+    "action": {
+      "name": "send-keys",
+      "keys": [
+        {
+          "key": "Right",
+          "shift": true,
+          "windows": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "Window/Dock window down",
+    "trigger": "W+J",
+    "action": {
+      "name": "send-keys",
+      "keys": [
+        {
+          "key": "Down",
+          "windows": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "Window/Dock window up",
+    "trigger": "W+K",
+    "action": {
+      "name": "send-keys",
+      "keys": [
+        {
+          "key": "Up",
+          "windows": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "Window/Dock window up",
+    "trigger": "W+L",
+    "action": {
+      "name": "send-keys",
+      "keys": [
+        {
+          "key": "Right",
+          "windows": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "Window/Dock window up",
+    "trigger": "W+H",
+    "action": {
+      "name": "send-keys",
+      "keys": [
+        {
+          "key": "Left",
+          "windows": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "Window/Close current window (application)",
+    "trigger": "W+C",
+    "action": {
+      "name": "send-keys",
+      "keys": [
+        {
+          "key": "F4",
+          "alt": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "Window/Position",
+    "trigger": "W+P",
+    "action": {
+      "name": "send-keys",
+      "keys": [
+        {
+          "key": "Z",
+          "windows": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "Go to/Go to systray",
+    "trigger": "G+O",
+    "action": {
+      "name": "send-keys",
+      "keys": [
+        {
+          "key": "B",
+          "windows": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "Go to/Go to taskbar",
+    "trigger": "F+Space",
+    "action": {
+      "name": "send-keys",
+      "keys": [
+        {
+          "key": "T",
+          "windows": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "Delete/Delete word on the left",
+    "trigger": "D+,",
+    "action": {
+      "name": "send-keys",
+      "keys": [
+        {
+          "key": "Backspace",
+          "control": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "Delete/Delete word on the left",
+    "trigger": "D+.",
+    "action": {
+      "name": "send-keys",
+      "keys": [
+        {
+          "key": "Delete",
+          "control": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "Delete/Delete current line of text to clipboard",
+    "trigger": "D+-",
+    "action": {
+      "name": "send-keys",
+      "keys": [
+        {
+          "key": "Home"
+        },
+        {
+          "key": "Home"
+        },
+        {
+          "key": "End",
+          "shift": true
+        },
+        {
+          "key": "Space"
+        },
+        {
+          "key": "Backspace"
+        },
+        {
+          "key": "Backspace"
+        }
+      ]
+    }
+  },
+  {
+    "name": "Navigation/Go to the end of the document",
+    "trigger": "Q+J",
+    "action": {
+      "name": "send-keys",
+      "keys": [
+        {
+          "key": "End",
+          "control": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "Navigation/Go to the beginning of the document",
+    "trigger": "Q+K",
+    "action": {
+      "name": "send-keys",
+      "keys": [
+        {
+          "key": "Home",
+          "control": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "Navigation/Go to the end of the line",
+    "trigger": "Q+L",
+    "action": {
+      "name": "send-keys",
+      "keys": [
+        {
+          "key": "End"
+        }
+      ]
+    }
+  },
+  {
+    "name": "Navigation/Go to the beginning of the line",
+    "trigger": "Q+H",
+    "action": {
+      "name": "send-keys",
+      "keys": [
+        {
+          "key": "Home"
+        }
+      ]
+    }
+  },
+  {
+    "name": "Test/Test",
+    "trigger": "T+O",
+    "action": {
+      "name": "show-toast",
+      "message": "Test",
+      "durationMs": 300
+    }
+  }
+]
